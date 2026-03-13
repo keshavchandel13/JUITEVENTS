@@ -21,7 +21,7 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
         {/* WELCOME TILE */}
-        <div className="md:col-span-2 bg-gradient-to-br from-cyan-600/20 to-transparent border border-cyan-500/20 rounded-3xl p-8 relative overflow-hidden group">
+        <div className="md:col-span-2 bg-linear-to-br from-cyan-600/20 to-transparent border border-cyan-500/20 rounded-3xl p-8 relative overflow-hidden group">
 
           <div className="relative z-10">
             <h2 className="text-4xl font-black text-white mb-2">

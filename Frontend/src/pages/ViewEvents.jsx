@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { getEvents, markComing } from "../api/createevent";
 import { FaLocationDot, FaCalendarDays, FaEye, FaUsers, FaFire } from "react-icons/fa6";
-
+import { useNavigate } from "react-router-dom";
 export default function ViewEvents() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate()
 
   useEffect(() => {
     loadEvents();
@@ -31,8 +32,8 @@ export default function ViewEvents() {
       {/* Header Section */}
       <div className="mb-12">
         <div className="flex items-center gap-3 mb-2">
-          <div className="h-[2px] w-12 bg-cyan-500"></div>
-          <span className="text-cyan-500 font-mono text-xs uppercase tracking-[0.3em]">Live_Feed</span>
+          <div className="h-0.5 w-12 bg-cyan-500"></div>
+          <span className="text-cyan-500 font-mono text-xs uppercase tracking-[0.3em]">Live_Feed</span>    
         </div>
         <h1 className="text-5xl font-black italic tracking-tighter text-white uppercase">
           Upcoming <span className="text-cyan-400">Events</span>
@@ -57,7 +58,7 @@ export default function ViewEvents() {
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   alt={event.title}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-transparent to-transparent"></div>
+                <div className="absolute inset-0 bg-linear-to-t from-[#030712] via-transparent to-transparent"></div>
                 
                 {/* Hot Badge for high coming count */}
                 {event.weAreComingCount > 10 && (
@@ -101,7 +102,11 @@ export default function ViewEvents() {
                       <span className="text-xs font-mono">{event.weAreComingCount || 0}</span>
                     </div>
                   </div>
-                  
+                  <button
+  onClick={() => navigate(`/register-event/${event._id}`)}
+>
+  Register
+</button>
                   <button
                     onClick={() => handleComing(event._id)}
                     className="relative px-6 py-2 bg-white text-black text-[10px] font-black uppercase tracking-widest rounded-full hover:bg-cyan-400 transition-all active:scale-90"
