@@ -1,54 +1,31 @@
-const { google } = require('googleapis');
-const stream = require('stream');
-const Gallery = require('../models/Gallery'); // Check this path matches your structure
+const Gallery = require('../models/Gallery');
 
-// Initialize Google Auth
-const KEYFILEPATH = './google-credentials.json'; 
-const SCOPES = ['https://www.googleapis.com/auth/drive.file'];
-const auth = new google.auth.GoogleAuth({ keyFile: KEYFILEPATH, scopes: SCOPES });
-const drive = google.drive({ version: 'v3', auth });
-
-// >>> CRITICAL: PASTE YOUR FOLDER ID HERE <<<
-const DRIVE_FOLDER_ID = 'YOUR_DRIVE_FOLDER_ID'; 
-
-const uploadEventImage = async (req, res) => {
+// 1. Add Image Link to DB
+const addEventImage = async (req, res) => {
     try {
-        if (!req.file) return res.status(400).json({ msg: "No image payload detected." });
+        const { title, redirectUrl, imageUrl } = req.body;
+        
+        if (!title || !imageUrl) {
+            return res.status(400).json({ msg: "Title and Image URL are required." });
+        }
 
-        const { title, redirectUrl } = req.body;
-        const bufferStream = new stream.PassThrough();
-        bufferStream.end(req.file.buffer);
-
-        // Transmit to Google Drive
-        const response = await drive.files.create({
-            requestBody: {
-                name: `${Date.now()}_${req.file.originalname}`,
-                parents: [DRIVE_FOLDER_ID],
-            },
-            media: {
-                mimeType: req.file.mimetype,
-                body: bufferStream,
-            },
-            fields: 'id',
-        });
-
-        const fileId = response.data.id;
-        const driveUrl = `https://drive.google.com/uc?export=view&id=${fileId}`;
-
-        // Log to MongoDB
-        const newEntry = await Gallery.create({
-            title,
-            redirectUrl,
-            driveUrl,
-            driveFileId: fileId
-        });
-
-        return res.status(201).json({ msg: "Payload deployed.", data: newEntry });
-
+        const newEntry = await Gallery.create({ title, redirectUrl, imageUrl });
+        return res.status(201).json({ msg: "Visual payload logged to database.", data: newEntry });
     } catch (error) {
-        console.error("Transmission Error:", error);
-        return res.status(500).json({ msg: "Server malfunction during upload." });
+        console.error(error);
+        return res.status(500).json({ msg: "Database malfunction." });
     }
 };
 
-module.exports = { uploadEventImage };
+// 2. Fetch all images for the frontend
+const getGalleryImages = async (req, res) => {
+    try {
+        const images = await Gallery.find().sort({ uploadedAt: -1 }); // Newest first
+        return res.status(200).json({ images });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ msg: "Failed to fetch gallery data." });
+    }
+};
+
+module.exports = { addEventImage, getGalleryImages };
