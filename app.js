@@ -6,11 +6,13 @@ const express = require("express");
 const cors = require('cors')
 const app = express();
 const mainRouter = require("./routes/user");
+const galleryRoutes = require("./routes/galleryRoute");
 
 app.use(express.json());
 
 app.use(cors())
 app.use("/api/v1", mainRouter);
+app.use('/api/v1/gallery', galleryRoutes);
 
 const port = process.env.PORT || 3000;
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import { FaCalendarAlt, FaUserCircle, FaSignOutAlt, FaRocket, FaBell, FaTicketAlt } from 'react-icons/fa';
+import { FaCalendarAlt, FaUserCircle, FaSignOutAlt, FaRocket, FaBell, FaTicketAlt, FaImage } from 'react-icons/fa';
 
 const Dashboard = () => {
   const [token] = useState(JSON.parse(localStorage.getItem("auth")) || "");
@@ -58,6 +58,9 @@ const Dashboard = () => {
           </Link>
           <Link to="/profile" className="flex items-center gap-3 p-3 text-slate-400 hover:bg-slate-800 rounded-xl transition-all">
             <FaUserCircle /> Identity
+          </Link>
+          <Link to="/gallery" className="flex items-center gap-3 p-3 text-slate-400 hover:bg-slate-800 rounded-xl transition-all">
+            <FaImage /> EventGallery
           </Link>
         </nav>
 
