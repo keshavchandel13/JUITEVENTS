@@ -20,6 +20,7 @@ import PublicLayout from "./pages/PublicLayout";
 import AdminLayout from "./pages/AdminLayout";
 import EventWinners from "./pages/EventWinners";
 import AdminWinners from "./pages/AdminWinners";
+import About from "./pages/About";
 const router = createBrowserRouter([
   // PUBLIC ROUTES
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/about",
+        element: <About />,
       },
     ],
   },
