@@ -128,12 +128,13 @@ const EventGallery = () => {
                   
                   {/* Event Redirection Logic */}
                   {img.redirectUrl && (
+                    <a href={img.redirectUrl} target='__blank'>
                     <button 
-                      onClick={() => navigate(img.redirectUrl)}
                       className="flex items-center gap-2 px-6 py-2 bg-linear-to-r from-purple-600 to-cyan-600 text-white font-bold uppercase text-[10px] tracking-widest rounded-full hover:scale-105 transition-transform"
                     >
                       <FaExternalLinkAlt /> Access Event Data
                     </button>
+                    </a>
                   )}
                 </div>
               </div>

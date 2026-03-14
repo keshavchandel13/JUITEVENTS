@@ -108,7 +108,7 @@ export default function CreateEvents() {
             <div>
               <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">Description</label>
               <textarea
-                className="mt-1 w-full bg-[#030712] border border-slate-800 rounded-xl px-4 py-3 focus:ring-1 focus:ring-cyan-500 outline-none min-h-[100px]"
+                className="mt-1 w-full bg-[#030712] border border-slate-800 rounded-xl px-4 py-3 focus:ring-1 focus:ring-cyan-500 outline-none min-h-25"
                 placeholder="Enter event brief..."
                 value={form.description}
                 onChange={(e) => setForm({ ...form, description: e.target.value })}

@@ -1,45 +1,87 @@
-
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Dashboard, HomeLayout, Landing, Login, Logout, Register, CreateEvent, Registration, ViewEvents , EventGallery, Profile } from "./pages";
-import { ToastContainer, toast } from 'react-toastify';
-
+import {
+  Dashboard,
+  HomeLayout,
+  Landing,
+  Login,
+  Logout,
+  Register,
+  CreateEvent,
+  Registration,
+  ViewEvents,
+  EventGallery,
+  AdminEventRegistrations,
+  EventRegister,
+  AdminDashboard,
+  Profile
+} from "./pages";
+import { ToastContainer, toast } from "react-toastify";
+import PublicLayout from "./pages/PublicLayout";
+import AdminLayout from "./pages/AdminLayout";
+import EventWinners from "./pages/EventWinners";
+import AdminWinners from "./pages/AdminWinners";
 const router = createBrowserRouter([
+  // PUBLIC ROUTES
   {
-    path: "/",
-    element: <HomeLayout />,
+    element: <PublicLayout />,
     children: [
       {
-        index: true,
+        path: "/",
         element: <Landing />,
       },
       {
-        path: "login",
+        path: "/login",
         element: <Login />,
       },
       {
-        path: "register",
+        path: "/register",
         element: <Register />,
       },
+    ],
+  },
+
+  // APP ROUTES (WITH SIDEBAR)
+  {
+    element: <HomeLayout />,
+    children: [
       {
-        path: "dashboard",
+        path: "/dashboard",
         element: <Dashboard />,
       },
       {
-        path: "logout",
-        element: <Logout />,
-      },
-      {
-        path: "events",
+        path: "/events",
         element: <ViewEvents />,
       },
 
+      {
+        path: "/gallery",
+        element: <EventGallery />,
+      },
+      {
+        path: "/register-event/:id",
+        element: <EventRegister />,
+      },
+      {
+        path: "/winner",
+        element: <EventWinners />,
+      },
+    ],
+  },
+  {
+    path: "/admin",
+    element: <AdminLayout />,
+    children: [
+      {
+        path: "dashboard",
+        element: <AdminDashboard />,
+      },
       {
         path: "create-event",
         element: <CreateEvent />,
       },
       {
-        path: "registrations",
-        element: <Registration />,
+        path: "participant",
+        element: <AdminEventRegistrations />,
       },
       {
         path: "gallery",
@@ -48,20 +90,21 @@ const router = createBrowserRouter([
       {
         path: "profile",
         element: <Profile />,
-      }
+      },
+      {
+        path: "winners",
+        element: <AdminWinners />,
+      },
     ],
   },
 ]);
-
 function App() {
-
-
   return (
     <>
-        <RouterProvider router={router} />
-        <ToastContainer position='top-center' />
+      <RouterProvider router={router} />
+      <ToastContainer position="top-center" />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
