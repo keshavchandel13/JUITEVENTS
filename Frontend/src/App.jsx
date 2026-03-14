@@ -52,7 +52,10 @@ const router = createBrowserRouter([
         path: "/events",
         element: <ViewEvents />,
       },
-
+      {
+        path: "profile",
+        element: <Profile />,
+      },  
       {
         path: "/gallery",
         element: <EventGallery />,
@@ -86,10 +89,6 @@ const router = createBrowserRouter([
       {
         path: "gallery",
         element: <EventGallery />,
-      },
-      {
-        path: "profile",
-        element: <Profile />,
       },
       {
         path: "winners",
