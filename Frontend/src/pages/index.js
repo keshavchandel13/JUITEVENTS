@@ -8,4 +8,4 @@ export {default as CreateEvent } from "./CreateEvent"
 export {default as Registration} from "./Registrations"
 export {default as ViewEvents} from "./ViewEvents"
 export {default as EventGallery} from "./EventGallery";
-// export {default as Profile} from "./Profile";
+export {default as Profile} from "./Profile";

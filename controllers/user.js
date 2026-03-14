@@ -32,6 +32,35 @@ const login = async (req, res) => {
   }
 };
 
+const getUserProfile = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select('-password');
+    if (!user) return res.status(404).json({ msg: "User not found." });
+    
+    res.status(200).json({ user });
+  } catch (error) {
+    console.error("Fetch Error:", error);
+    res.status(500).json({ msg: "Failed to fetch identity parameters." });
+  }
+};
+
+const updateUserProfile = async (req, res) => {
+  try {
+    const { name, branch, semester, residence, enrollmentNo } = req.body;
+    
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user.id,
+      { name, branch, semester, residence, enrollmentNo },
+      { new: true, runValidators: true }
+    ).select('-password');
+
+    res.status(200).json({ msg: "Profile overridden successfully.", user: updatedUser });
+  } catch (error) {
+    console.error("Update Error:", error);
+    res.status(500).json({ msg: "Transmission failed." });
+  }
+};
+
 const dashboard = async (req, res) => {
 
   res.status(200).json({
@@ -70,4 +99,6 @@ module.exports = {
   register,
   dashboard,
   getAllUsers,
+  getUserProfile,
+  updateUserProfile
 };
