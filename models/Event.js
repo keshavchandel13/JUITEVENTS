@@ -20,7 +20,7 @@ const EventSchema = new mongoose.Schema({
   },
 
   image: {
-    type: String   // store image URL
+    type: String
   },
 
   startDate: {
@@ -39,6 +39,21 @@ const EventSchema = new mongoose.Schema({
   views: {
     type: Number,
     default: 0
+  },
+
+  winners: {
+    first: {
+      type: String,
+      default: ""
+    },
+    second: {
+      type: String,
+      default: ""
+    },
+    third: {
+      type: String,
+      default: ""
+    }
   }
 
 }, { timestamps: true });

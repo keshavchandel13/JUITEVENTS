@@ -4,8 +4,17 @@ const router = express.Router();
 const Event = require("../models/Event");
 const Registration = require("../models/Registration");
 
+router.get("/events/winners", async (req, res) => {
 
+  const events = await Event.find({
+    "winners.first": { $ne: "" }
+  });
+
+  res.json(events);
+
+});
 /* Create Event */
+
 router.post("/create-event", async (req, res) => {
 
   try {
@@ -153,6 +162,21 @@ router.get("/admin/event-registrations", async (req, res) => {
     });
 
   }
+
+});
+router.put("/events/:id/winners", async (req, res) => {
+
+  const { first, second, third } = req.body;
+
+  const event = await Event.findByIdAndUpdate(
+    req.params.id,
+    {
+      winners: { first, second, third }
+    },
+    { new: true }
+  );
+
+  res.json(event);
 
 });
 

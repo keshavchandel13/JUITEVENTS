@@ -94,8 +94,8 @@ export default function ViewEvents() {
                 <div className="flex items-center justify-between py-4 border-t border-slate-800/50">
                   <div className="flex gap-4">
                     <div className="flex items-center gap-2 text-slate-500">
-                      <FaEye size={14} />
-                      <span className="text-xs font-mono">{event.views || 0}</span>
+                    
+                
                     </div>
                     <div className="flex items-center gap-2 text-cyan-500 font-bold">
                       <FaUsers size={14} />

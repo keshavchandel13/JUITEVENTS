@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet, Link, useNavigate } from "react-router-dom";
 import { FaCalendarAlt, FaUserCircle, FaSignOutAlt, FaRocket, FaBell, FaTicketAlt, FaImage } from "react-icons/fa";
-
+import { FaTrophy } from "react-icons/fa6";
 const HomeLayout = () => {
 
   const navigate = useNavigate();
@@ -33,12 +33,15 @@ const HomeLayout = () => {
             <FaCalendarAlt /> Browse Events
           </Link>
 
-          <Link to="/registrations" className="flex items-center gap-3 p-3 hover:bg-slate-800 rounded-xl">
+          {/* <Link to="/registrations" className="flex items-center gap-3 p-3 hover:bg-slate-800 rounded-xl">
             <FaTicketAlt /> Registrations
-          </Link>
+          </Link> */}
 
           <Link to="/gallery" className="flex items-center gap-3 p-3 hover:bg-slate-800 rounded-xl">
             <FaImage /> Event Gallery
+          </Link>
+          <Link to="/winner" className="flex items-center gap-3 p-3 hover:bg-slate-800 rounded-xl">
+            <FaTrophy/> Victory Stand
           </Link>
 
           <Link to="/profile" className="flex items-center gap-3 p-3 hover:bg-slate-800 rounded-xl">
